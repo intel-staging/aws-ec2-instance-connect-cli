@@ -187,11 +187,11 @@ def _parse_instance_bundles(instance_bundles):
     for bundle in instance_bundles:
         # We parse target in a specific order based on mode due to how commands prioritize/mark parts optional
         if '@' in bundle['target']:
-            if len(bundle['target'].split('@')) > 2:
-                # Host details includes an @.  Invalid.
-                raise AssertionError('Invalid target')
+            # if len(bundle['target'].split('@')) > 2:
+            #     # Host details includes an @.  Invalid.
+            #     raise AssertionError('Invalid target')
             # A user was specified
-            bundle['username'], bundle['target'] = bundle['target'].split('@')
+            bundle['username'], bundle['target'] = bundle['target'].rsplit('@', maxsplit=1)
         if ':' in bundle['target']:
             # May be present for sftp
             bundle['target'], bundle['file'] = bundle['target'].split(':')
